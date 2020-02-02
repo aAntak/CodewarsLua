@@ -17,34 +17,23 @@ In ["NORTH", "EAST", "WEST", "SOUTH", "WEST", "WEST"], "NORTH" and "SOUTH" are n
 -]]
 
 --My solution
-local solution = {}
+local kata = {}
 
-function solution.solution(value)
-  -- Your code here.
-  local sum=0;
-  for i=1,value-1,1 do
-    if math.fmod(i,3)==0 or math.fmod(i,5)==0 then
-      sum=sum+i;
-    end
-  end
-  return sum;
-  
-end
+function kata.dirReduc(dir)
+    -- your code
+    local val = { ["NORTH"] = "SOUTH", ["EAST"] = "WEST", ["WEST"] = "EAST", ["SOUTH"] = "NORTH" };
+    local path = {}; 
 
-return solution
-
---[[ Upvoted as most clever solution:
-local solution = {}
-
-function solution.solution(value)
-  local sum = 0
-  for i=0,value-1,1
-  do
-    if i%3==0 or i%5==0 then sum = sum +i end
-  end
+    path[1] = dir[1];
     
-  return sum
+    for i = 2, #dir, 1 do
+      if path[#path] == val[dir[i]] then
+        path[#path] = nil;
+      else 
+        path[#path + 1] = dir[i];
+      end
+    end
+    return path;
 end
 
-return solution
---]]
+return kata
